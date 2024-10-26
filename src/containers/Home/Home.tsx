@@ -60,7 +60,7 @@ const Home = () => {
                   </CardContent>
                   <CardActions>
                     <Button
-                      to={`/quotes/${quote.id}`}
+                      to={`/quotes/${quote.id}/edit`}
                       size="small"
                       component={NavLink}
                     >

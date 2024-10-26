@@ -3,9 +3,8 @@ import { FormControl, NativeSelect } from '@mui/material';
 import { InputLabel} from '@mui/material';
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IQuoteForm } from '../../types';
-import axiosAPI from '../../axiosAPI.ts';
 
 const initialForm = {
   category: "",
@@ -13,18 +12,23 @@ const initialForm = {
   quote: "",
 };
 
-const AddQuote = () => {
+interface Props {
+  retell?: IQuoteForm;
+  submitForm: (post: IQuoteForm) => void;
+}
+
+const AddQuote: React.FC<Props> = ({retell, submitForm}) => {
   const [form, setForm] = useState<IQuoteForm>({ ...initialForm });
 
-  // useEffect(() => {
-  //     if (post) {
-  //       setForm((prevState) => ({
-  //         ...prevState,
-  //         ...post,
-  //       }));
-  //     }
-  //   }, [post]);
-  //
+  useEffect(() => {
+      if (retell) {
+        setForm((prevState) => ({
+          ...prevState,
+          ...retell,
+        }));
+      }
+    }, [retell]);
+
     const onChangeField = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
       setForm((prevState) => ({
@@ -35,7 +39,12 @@ const AddQuote = () => {
 
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axiosAPI.post("quotes.json", { ...form });
+
+    submitForm({ ...form,});
+
+    if (!retell) {
+      setForm({ ...initialForm });
+    }
   };
 
   return (
