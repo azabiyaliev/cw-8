@@ -9,7 +9,6 @@ const EditQuote = () => {
   const params = useParams<{ idQuote: string }>();
   const navigate = useNavigate();
 
-
   const fetchQuote = useCallback(async (id: string) => {
     try {
       const response: { data: IQuote } = await axiosAPI<IQuote>(
