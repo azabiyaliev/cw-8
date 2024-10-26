@@ -72,11 +72,11 @@ const AddQuote: React.FC<Props> = ({retell, submitForm}) => {
               aria-selected={false}
               onChange={onChangeField}
             >
-              <option value={"Star wars"}>Star wars</option>
-              <option value={"Famous people"}>Famous people</option>
-              <option value={"Saying"}>Saying</option>
-              <option value={"Humour"}>Humour</option>
-              <option value={"Motivational"}>Motivational</option>
+              <option value={"star-wars"}>Star wars</option>
+              <option value={"famous-people"}>Famous people</option>
+              <option value={"saying"}>Saying</option>
+              <option value={"humour"}>Humour</option>
+              <option value={"motivational"}>Motivational</option>
             </NativeSelect>
           </FormControl>
         </Box>

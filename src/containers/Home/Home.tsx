@@ -12,6 +12,13 @@ const Home = () => {
   const [quotes, setQuotes] = useState<IQuote[]>([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
+  const [category] = useState([
+    {title: "Star wars", id: "star-wars"},
+    {title: "Famous people", id: "famous-people"},
+    {title: "Saying", id: "saying"},
+    {title: "Humour", id: "humour"},
+    {title: "Motivational", id: "motivational"},
+  ]);
 
   const fetchData = useCallback(async () => {
 
@@ -56,11 +63,11 @@ const Home = () => {
       {loading ? (<Loader/>) : (<div className="d-flex">
         <div className="d-flex flex-column">
           <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">All</NavLink>
-          <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">Star wars</NavLink>
-          <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">Famous people</NavLink>
-          <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">Saying</NavLink>
-          <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">Humour</NavLink>
-          <NavLink style={{textDecoration: "none", color: "inherit"}} to="/quotes">Motivational</NavLink>
+          {category.map(category => (
+            <>
+              <NavLink key={category.id} style={{textDecoration: "none", color: "inherit"}} to={`/quotes/${category.id}`}>{category.title}</NavLink>
+            </>
+          ))}
         </div>
         <div>
           <div className="ps-5 ms-5"> {quotes.length === 0 ? (
@@ -74,7 +81,7 @@ const Home = () => {
                       <Typography
                         sx={{fontSize: 30, ms: 0, ps: 0,}}
                         variant="body2"
-                      >{`"${quote.quote}"`}
+                      >{`«${quote.quote}»`}
                       </Typography>
                       <Typography
                         sx={{fontSize: 30, ms: 0, ps: 0}}
